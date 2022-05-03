@@ -21,19 +21,19 @@ const TreeGridContainer = () => {
                 let id = myChildren.length === 0 ? 1 : myChildren[myChildren.length-1].id + 1;
                 myChildren.push({fullName: user.fullName , position: user.position, salary: user.salary , date: user.date,
                     type: user.type, id: id, Children: []});
-                setNewUser(users.map((item) => item.id == user.id ? {fullName: myUser.fullName , position: myUser.position, salary: myUser.salary , date: myUser.date,
+                setNewUser(users.map((item) => item.id === user.id ? {fullName: myUser.fullName , position: myUser.position, salary: myUser.salary , date: myUser.date,
                     type: myUser.type, id: myUser.id, Children: myChildren} : item));
                 
             } else {
-    
-                setNewUser(users.map((item) => item.id == child.parent ? {fullName: item.fullName , position: item.position,
-                    salary: item.salary , date: item.date, type: item.type, id: item.id, Children: item.Children.push({
-                        fullName: user.fullName , position: user.position,
-                    salary: user.salary , date: user.date, type: user.type, id: item.id, Children: []
 
-                    })} : item));
-            }
-            setChild({parent: 0, bool: false});
+                let myUser =  users.find((item) => item.id === child.parent);
+                let myChildren = myUser.Children;
+                let newChildren = myChildren.map((item) => item.id === user.id ? {fullName: user.fullName , position: user.position, salary: user.salary , date: user.date,
+                    type: user.type, id: user.id, Children: []} : item);
+                setNewUser(users.map((item) => item.id === child.parent ? {fullName: myUser.fullName , position: myUser.position, salary: myUser.salary , date: myUser.date,
+                    type: myUser.type, id: myUser.id, Children: newChildren} : item));
+                }
+                setChild({parent: 0, bool: false});
 
 
         } else {
@@ -63,7 +63,10 @@ const TreeGridContainer = () => {
 
     // onchange function //
     const onChange = (event) => {
-        let name = event.target.name; 
+        let name = event.target.name;
+        
+        /* setUser([...user, name: event.target.value]) */
+
         switch(name) {
 
             case 'fullName':
@@ -134,10 +137,16 @@ const TreeGridContainer = () => {
         let newArray = users;
         let myUser = newArray.find((item) => item.id === id);
 
-        setUser({ fullName: myUser.fullName, position: myUser.position, salary: myUser.salary , date: myUser.date,
-            type: myUser.type , id: id, Children: myUser.Children });
+        if(childId != 0) {
+            setChild({parent: id, bool: true});
+            let myChild = myUser.Children.find((child) => child.id === childId);
+            setUser({ fullName: myChild.fullName, position: myChild.position, salary: myChild.salary , date: myChild.date,
+                type: myChild.type , id: childId, Children: [] });
 
-        if(childId != 0) setChild({parent: id, bool: true});
+        } else {
+            setUser({ fullName: myUser.fullName, position: myUser.position, salary: myUser.salary , date: myUser.date,
+                type: myUser.type , id: id, Children: myUser.Children });
+        }
         
 
         

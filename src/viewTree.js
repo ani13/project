@@ -1,5 +1,6 @@
 import MainTableTree from "./components/TreeTable/MainTableTree";
 import Modal from "./components/Modal";
+import Button from '@mui/material/Button';
 
 const ViewTree= ({ usersArray,
          singleUser, modalProp,  setModal , submit,  onChange ,
@@ -9,8 +10,8 @@ const ViewTree= ({ usersArray,
 
         <div className = 'container'>
             
-            <button type = 'button' id = 'formButton' onClick={() => setModal(true)} style = {{ filter: modalProp ? 'blur(2px)' : 'none'}}
-            > Add new User </button>
+            <Button type = 'button' id = 'formButton' onClick={() => setModal(true)} style = {{ filter: modalProp ? 'blur(2px)' : 'none'}}
+            > Add new User </Button>
             
             <MainTableTree usersArray = {usersArray}  modal = {modalProp} setModal = {setModal}
             deleteUser = {deleteUser}  updateUser = {updateUser} addChild = {addChild} />
