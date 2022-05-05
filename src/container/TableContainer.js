@@ -22,7 +22,7 @@ const TableContainer = () => {
             
         } else {
 
-            setNewUser(users.map((item) => item.id == user.id ? {fullName: user.fullName , position: user.position,
+            setNewUser(users.map((item) => item.id === user.id ? {fullName: user.fullName , position: user.position,
                 salary: user.salary , date: user.date, type: user.type, id: item.id} : item));
         }
 

@@ -1,4 +1,4 @@
-
+import { Button } from "@mui/material";
 import MainTable from "./components/Table/MainTable";
 import Modal from "./components/Modal";
 
@@ -10,8 +10,8 @@ const ViewGrid = ({ usersArray,
 
         <div className = 'container'>
             
-            <button type = 'button' id = 'formButton' onClick={() => setModal(true)} style = {{ filter: modalProp ? 'blur(2px)' : 'none'}}
-            > Add new User </button>
+            <Button type = 'button' id = 'formButton' onClick={() => setModal(true)} style = {{ filter: modalProp ? 'blur(2px)' : 'none'}}
+            > Add new User </Button>
             
             <MainTable usersArray = {usersArray}  modal = {modalProp} 
             deleteUser = {deleteUser}  updateUser = {updateUser} />

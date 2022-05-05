@@ -1,28 +1,40 @@
-import TableHead from "./TableHead";
+import TableHeadComponent from "./TableHead";
+import Button from '@mui/material/Button';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 
 const MainTable = ({usersArray, modal, deleteUser,  updateUser}) => {
 
     return (
-            <table className='table' style = {{ filter: modal ? 'blur(2px)' : 'none'}}>
+        <TableContainer component={Paper}>
+            <Table className='table' style = {{ filter: modal ? 'blur(2px)' : 'none'}}>
                 
-                <TableHead />
+                <TableHeadComponent />
+                <TableBody>
                 { usersArray.map((item, id) => (
 
-                    <tr>
-                        <td> {item.id}</td>
-                        <td>{item.fullName}</td>
-                        <td>{item.position}</td>
-                        <td>{item.salary}</td>
-                        <td>{item.date}</td>
-                        <td>{item.type}</td>
-                        <td > <button className = 'button' type='button' onClick = {() => deleteUser(item.id)}> Delete </button></td>
-                        <td > <button className = 'button' type='button' onClick = {() => updateUser(item.id)}> Update </button></td>
+                    <TableRow>
+                        <TableCell> {item.id}</TableCell>
+                        <TableCell>{item.fullName}</TableCell>
+                        <TableCell>{item.position}</TableCell>
+                        <TableCell>{item.salary}</TableCell>
+                        <TableCell>{item.date}</TableCell>
+                        <TableCell>{item.type}</TableCell>
+                        <TableCell > <Button variant="contained" className = 'button' type='button' onClick = {() => deleteUser(item.id)}> Delete </Button></TableCell>
+                        <TableCell > <Button variant="contained" className = 'button' type='button' onClick = {() => updateUser(item.id)}> Update </Button></TableCell>
 
-                    </tr>
+                    </TableRow>
 
-            ))}
+                ))}
+                </TableBody>
                 
-            </table>);
+            </Table>
+        </TableContainer>);
 
 }
 

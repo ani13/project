@@ -62,6 +62,15 @@ li {
   display: none;
 }
 
+.itemContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+div {
+  margin: 5px;
+}
 
 
 
