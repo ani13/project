@@ -5,17 +5,20 @@ import { Button } from '@mui/material';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
+import React from 'react'
 
 const Modal = ({ 
-    singleUser, modal,  submit,  onChange  }) => {
+    singleUser, modal,  submit,  onChange , useStyles }) => {
+
+    const classes = useStyles();
 
     return(
       
-        <div className = "formContainer" style = {{ display: modal ? "block" : "none"}}>
+        <div className = {classes.modal} style = {{ display: modal ? "block" : "none"}}>
 
-                <Stack className = 'form' spacing={2}>
+                <Stack className = {classes.form} spacing={2}>
                     <TextField
-                        id="outlined-password-input"
+                        className = {classes.formItem}
                         label="Full Name"
                         type = 'text'
                         name = 'fullName'
@@ -25,7 +28,7 @@ const Modal = ({
                     />
 
                     <TextField
-                        id="outlined-password-input"
+                        className = {classes.formItem}
                         label="Position"
                         type = 'text'
                         name = 'position'
@@ -35,7 +38,7 @@ const Modal = ({
                     />
 
                     <TextField
-                        id="outlined-password-input"
+                        className = {classes.formItem}
                         label="Salary"
                         type = 'number'
                         name = 'salary'
@@ -45,12 +48,12 @@ const Modal = ({
                     />
 
                     <TextField
+                        className = {classes.formItem}
                         id="date"
                         name = 'date'
                         label="Date"
                         type="date"
                         value={singleUser.date}
-                        sx={{ width: 220 }}
                         InputLabelProps={{
                         shrink: true,
                         }}
@@ -59,21 +62,21 @@ const Modal = ({
 
 
                 
-                    <FormLabel id="demo-controlled-radio-buttons-group">Type:</FormLabel>
+                    <FormLabel id="demo-controlled-radio-buttons-group" className = {classes.formItem} >Type:</FormLabel>
                     <RadioGroup
                         aria-labelledby="demo-controlled-radio-buttons-group"
                         name="controlled-radio-buttons-group"
                         value={singleUser.type}
                         onChange={(event) => onChange(event) }
                     >
-                        <FormControlLabel value="Intern" control={<Radio name = 'radiobutton' checked = {singleUser.type == 'Intern'} value = 'Intern' onChange={(event) => onChange(event) } />} label="Intern" />
-                        <FormControlLabel value="Junior" control={<Radio name ='radiobutton' checked = {singleUser.type == 'Junior'} value = 'Junior' onChange={(event) => onChange(event) } />} label="Junior" />
-                        <FormControlLabel value="Senior" control={<Radio name ='radiobutton' checked = {singleUser.type == 'Senior'} value = 'Senior' onChange={(event) => onChange(event) }/>} label="Senior" />
+                        <FormControlLabel value="Intern" control={<Radio name = 'radiobutton' checked = {singleUser.type === 'Intern'} value = 'Intern' onChange={(event) => onChange(event) } />} label="Intern" />
+                        <FormControlLabel value="Junior" control={<Radio name ='radiobutton' checked = {singleUser.type === 'Junior'} value = 'Junior' onChange={(event) => onChange(event) } />} label="Junior" />
+                        <FormControlLabel value="Senior" control={<Radio name ='radiobutton' checked = {singleUser.type === 'Senior'} value = 'Senior' onChange={(event) => onChange(event) }/>} label="Senior" />
 
                     </RadioGroup>
 
                     
-                    <Button className = 'submit' variant="outlined"  onClick={ () => submit()}> Submit </Button>
+                    <Button className = {classes.Submitbutton} variant="contained" id = 'submitButton' onClick={ () => submit()}> Submit </Button>
 
                 </Stack>
             </div>

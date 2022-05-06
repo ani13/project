@@ -6,10 +6,12 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import React from 'react';
 
 
-const MainTable = ({usersArray, modal, deleteUser,  updateUser}) => {
+const MainTable = ({usersArray, modal, deleteUser,  updateUser, useStyles}) => {
 
+    const classes = useStyles();
     return (
         <TableContainer component={Paper}>
             <Table className='table' style = {{ filter: modal ? 'blur(2px)' : 'none'}}>
@@ -25,8 +27,8 @@ const MainTable = ({usersArray, modal, deleteUser,  updateUser}) => {
                         <TableCell>{item.salary}</TableCell>
                         <TableCell>{item.date}</TableCell>
                         <TableCell>{item.type}</TableCell>
-                        <TableCell > <Button variant="contained" className = 'button' type='button' onClick = {() => deleteUser(item.id)}> Delete </Button></TableCell>
-                        <TableCell > <Button variant="contained" className = 'button' type='button' onClick = {() => updateUser(item.id)}> Update </Button></TableCell>
+                        <TableCell > <Button variant="contained" className = {classes.button} type='button' onClick = {() => deleteUser(item.id)}> Delete </Button></TableCell>
+                        <TableCell > <Button variant="contained" className = {classes.button} type='button' onClick = {() => updateUser(item.id)}> Update </Button></TableCell>
 
                     </TableRow>
 

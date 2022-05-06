@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, {useState} from 'react';
 import ViewTree from '../viewTree';
 
-const TreeGridContainer = () => {
+const TreeGridContainer = ({useStyles}) => {
          //states 
     const [users, setNewUser] = useState([]);
     const [user, setUser] = useState({ fullName: '', position: '', salary: null , date: '',
@@ -13,7 +13,7 @@ const TreeGridContainer = () => {
     // submit function //
     const submit = () => {
 
-        if(user.id == 0) {
+        if(user.id === 0) {
 
             let id = users.length === 0 ? 1 : users[users.length-1].id + 1;
             let u = {fullName: user.fullName , position: user.position, salary: user.salary , date: user.date,
@@ -25,8 +25,6 @@ const TreeGridContainer = () => {
             setNewUser(users.map((item) => item.id === user.id ? {fullName: user.fullName , position: user.position,
                 salary: user.salary , date: user.date, type: user.type, id: item.id, parentId: user.parentId, open: user.open} : item));
         }
-
-        console.log(user);
 
         setUser({fullName: '' , position: '', salary: '' , date: '',
         type: '', id: 0, parentId: 0, open: true });
@@ -73,6 +71,8 @@ const TreeGridContainer = () => {
                 setUser({fullName: user.fullName , position: user.position, salary: user.salary , date: user.date,
                     type: event.target.value, id: user.id, parentId: user.parentId, open: user.open});
                 break;
+            default:
+                break;
 
             
         }
@@ -117,7 +117,6 @@ const TreeGridContainer = () => {
     const addChild = (id) => {
 
         setModal(true);
-        // ამით მხოლოდ აიდის ვუცვლი უზერს მშობლის 
         setUser({fullName: user.fullName , position: user.position, salary: user.salary , date: user.date,
             type: user.type, id: user.id, parentId: id, open: user.open});
 
@@ -126,7 +125,8 @@ const TreeGridContainer = () => {
 
     return (<ViewTree usersArray = {users} 
          singleUser = {user} modalProp = {modal} setModal = {setModal} submit = {submit} onChange = {onChange}
-          deleteUser = {deleteUser} updateUser = {updateUser} addChild = {addChild} updateOpen = {updateOpen} />);
+          deleteUser = {deleteUser} updateUser = {updateUser} addChild = {addChild}
+           updateOpen = {updateOpen} useStyles = {useStyles}/>);
 }
 
 export default TreeGridContainer;

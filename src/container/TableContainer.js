@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import ViewGrid from '../view';
 
-const TableContainer = () => {
+const TableContainer = ({useStyles}) => {
 
     //states 
     const [users, setNewUser] = useState([]);
@@ -13,7 +13,7 @@ const TableContainer = () => {
 
     // submit function //
     const submit = () => {
-        if(user.id == 0) {
+        if(user.id === 0) {
 
             let id = users.length === 0 ? 1 : users[users.length-1].id + 1;
             let u = {fullName: user.fullName , position: user.position, salary: user.salary , date: user.date,
@@ -68,6 +68,8 @@ const TableContainer = () => {
                 setUser({fullName: user.fullName , position: user.position, salary: user.salary , date: user.date,
                     type: event.target.value, id: user.id});
                 break;
+            default:
+                break;
 
             
         }
@@ -105,7 +107,7 @@ const TableContainer = () => {
 
     return (<ViewGrid usersArray = {users} 
          singleUser = {user} modalProp = {modal} setModal = {setModal} submit = {submit} onChange = {onChange}
-          deleteUser = {deleteUser} updateUser = {updateUser} />);
+          deleteUser = {deleteUser} updateUser = {updateUser} useStyles = {useStyles} />);
 
 }
 
