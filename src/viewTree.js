@@ -1,5 +1,5 @@
 import MainTableTree from "./components/TreeTable/MainTableTree";
-import Modal from "./components/Modal";
+import MyModal from "./components/Modal";
 import Button from '@mui/material/Button';
 import React from 'react'
 
@@ -9,7 +9,7 @@ import React from 'react'
 
 const ViewTree= ({ usersArray,
          singleUser, modalProp,  setModal , submit,  onChange ,
-          deleteUser,  updateUser, addChild, updateOpen, useStyles }) => {
+          deleteUser,  updateUser, addChild,useStyles }) => {
 
     const classes = useStyles();
 
@@ -22,10 +22,10 @@ const ViewTree= ({ usersArray,
             <Button  variant="contained" className = {classes.Submitbutton} id = 'formButton' onClick={() => setModal(true)} style = {{ filter: modalProp ? 'blur(2px)' : 'none'}}
             > Add new User </Button>
             
-            <MainTableTree usersArray = {usersArray}  modal = {modalProp} setModal = {setModal}
-            deleteUser = {deleteUser}  updateUser = {updateUser} addChild = {addChild} updateOpen = {updateOpen} useStyles = {useStyles} />
+            <MainTableTree usersArray = {usersArray}  modal = {modalProp} 
+            deleteUser = {deleteUser}  updateUser = {updateUser} addChild = {addChild} useStyles = {useStyles} />
 
-            <Modal  singleUser = {singleUser} modal = {modalProp}
+            <MyModal  singleUser = {singleUser} modal = {modalProp} setModal = {setModal}
              submit = {submit}  onChange = {onChange} useStyles = {useStyles} />
         </div>
     );

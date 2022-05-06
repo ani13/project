@@ -36,42 +36,36 @@ const useStyles = makeStyles({
       borderRadius: 3,
       boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
       color: "white",
-      height: 48,
       padding: "0 30px",
       margin: 8,
       height: '30px'
     }, 
 
     modal: {
-      filter:'unset',
-      display: 'none',
-      position: 'absolute',
-      left: 0,
-      top: 0,
-      width: '100%',
-      height: 'fit-content',
-      backgroundColor: 'rgba(0,0,0,0.5)',
+      
     },
 
     form: {
-      padding: '10px',
-      margin: '20px',
-      borderStyle: 'solid',
-      borderWidth: '5px',
-      display: 'none',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 300,
+      border: '2px solid #000',
+      boxShadow: 24,
+      p: 4,
+      display: 'flex',
       backgroundColor: 'white', 
-      width: 'fit-content',
       alignItems: 'center',
       justifyContent: 'center',
-      marginLeft: 'auto',
-      marginRight: 'auto'
+      padding: '10px'
 
     
     },
 
     formItem: {
-      padding: '10px',
-      width: '200px'
+      padding: '5px',
+      width: '250px'
 
     },
 
@@ -94,15 +88,9 @@ const useStyles = makeStyles({
       columnGap: '5px',
       rowGap: '5px',
       margin: '15px',
-    },
-
-    RowItem: {
-      textAlign: 'center',
-      border: '5px',
-      margin: '5px'
-
-
     }
+
+   
 
   });
 

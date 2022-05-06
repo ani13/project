@@ -12,15 +12,15 @@ const TableHeadTree = ({useStyles}) => {
         <TreeItem nodeId = '0' label = {
             <Fragment>
             <div className = {classes.Row} >
-                <div clasName = {classes.RowItem} >ID</div>
-                <div clasName = {classes.RowItem}>Full Name</div>
-                <div clasName = {classes.RowItem}>Position</div>
-                <div clasName = {classes.RowItem}>Salary</div>
-                <div clasName = {classes.RowItem}>Date</div>
-                <div clasName = {classes.RowItem}>Type</div>
-                <div clasName = {classes.RowItem}>Delete</div>
-                <div clasName = {classes.RowItem}>Update</div>
-                <div clasName = {classes.RowItem}>Add a child</div>
+                <div  >ID</div>
+                <div >Full Name</div>
+                <div >Position</div>
+                <div >Salary</div>
+                <div >Date</div>
+                <div >Type</div>
+                <div >Delete</div>
+                <div >Update</div>
+                <div >Add a child</div>
             </div>
             </Fragment>
         }>

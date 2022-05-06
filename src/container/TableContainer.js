@@ -39,40 +39,8 @@ const TableContainer = ({useStyles}) => {
     // onchange function //
     const onChange = (event) => {
         let name = event.target.name; 
-        switch(name) {
-
-            case 'fullName':
-
-                setUser({fullName: event.target.value , position: user.position, salary: user.salary , date: user.date,
-                type: user.type, id: user.id});
-                break;
-
-            case 'position':
-
-                setUser({fullName: user.fullName , position: event.target.value, salary: user.salary , date: user.date,
-                    type: user.type, id: user.id });
-                    break;
-                    
-            case 'salary':
-
-                setUser({fullName: user.fullName , position: user.position, salary: event.target.value , date: user.date,
-                    type: user.type, id: user.id});
-                break;
-                    
-            case 'date':
-
-                setUser({fullName: user.fullName , position: user.position, salary: user.salary , date: event.target.value,
-                    type: user.type, id: user.id});
-                break;
-            case 'radiobutton':
-                setUser({fullName: user.fullName , position: user.position, salary: user.salary , date: user.date,
-                    type: event.target.value, id: user.id});
-                break;
-            default:
-                break;
-
-            
-        }
+        if(name === 'radiobutton') setUser({...user, type: event.target.value});
+        else setUser({...user, [name]: event.target.value});
     }
 
     //==================================================================================================//

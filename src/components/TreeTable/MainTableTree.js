@@ -8,7 +8,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import React from 'react'
 
 
-const MainTableTree = ({usersArray, modal, setModal, deleteUser,  updateUser, addChild, updateOpen, useStyles}) => {
+const MainTableTree = ({usersArray, modal, deleteUser,  updateUser, addChild, useStyles}) => {
 
     
     const classes = useStyles();
@@ -24,15 +24,15 @@ const MainTableTree = ({usersArray, modal, setModal, deleteUser,  updateUser, ad
             <TreeItem nodeId = {`${item.id}`} label = {
                 <Fragment>
                 <div className = {classes.Row}>
-                    <div clasName = {classes.RowItem}> {item.id} </div>
-                    <div clasName = {classes.RowItem}> {item.fullName} </div>
-                    <div clasName = {classes.RowItem}> {item.position} </div>
-                    <div clasName = {classes.RowItem}> {item.salary} </div>
-                    <div clasName = {classes.RowItem}> {item.date} </div>
-                    <div clasName = {classes.RowItem}> {item.type} </div>  
-                    <div clasName = {classes.RowItem}> <Button variant="contained" className = {classes.button} type='button' onClick = {() => deleteUser(item.id)}> Delete </Button> </div>
-                    <div clasName = {classes.RowItem}> <Button variant="contained" className = {classes.button} type='button' onClick = {() => updateUser(item.id)}> Update </Button> </div>
-                    <div clasName = {classes.RowItem}> <Button variant="contained" className = {classes.button} type='button'  onClick = {() => addChild(item.id)}> Child </Button>  </div>
+                    <div> {item.id} </div>
+                    <div> {item.fullName} </div>
+                    <div> {item.position} </div>
+                    <div> {item.salary} </div>
+                    <div> {item.date} </div>
+                    <div> {item.type} </div>  
+                    <div> <Button variant="contained" className = {classes.button} type='button' onClick = {() => deleteUser(item.id)}> Delete </Button> </div>
+                    <div> <Button variant="contained" className = {classes.button} type='button' onClick = {() => updateUser(item.id)}> Update </Button> </div>
+                    <div> <Button variant="contained" className = {classes.button} type='button'  onClick = {() => addChild(item.id)}> Child </Button>  </div>
                 </div>
               </Fragment>
 

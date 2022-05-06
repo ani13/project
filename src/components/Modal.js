@@ -2,19 +2,24 @@
 import Radio from '@mui/material/Radio';
 import { Stack, TextField} from '@mui/material';
 import { Button } from '@mui/material';
+import { Modal } from '@mui/material';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import React from 'react'
 
-const Modal = ({ 
-    singleUser, modal,  submit,  onChange , useStyles }) => {
+const MyModal = ({ 
+    singleUser, modal, setModal,  submit,  onChange , useStyles }) => {
 
     const classes = useStyles();
 
     return(
       
-        <div className = {classes.modal} style = {{ display: modal ? "block" : "none"}}>
+        <Modal 
+            open = {modal} 
+            onClose = {() => setModal(false)}
+            className = {classes.modal} 
+        >
 
                 <Stack className = {classes.form} spacing={2}>
                     <TextField
@@ -79,7 +84,7 @@ const Modal = ({
                     <Button className = {classes.Submitbutton} variant="contained" id = 'submitButton' onClick={ () => submit()}> Submit </Button>
 
                 </Stack>
-            </div>
+            </Modal>
 
         
 
@@ -87,4 +92,4 @@ const Modal = ({
 
 }
 
-export default Modal;
+export default MyModal;

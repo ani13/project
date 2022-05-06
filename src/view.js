@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import MainTable from "./components/Table/MainTable";
-import Modal from "./components/Modal";
+import MyModal from "./components/Modal";
 import React from 'react'
 
 
@@ -21,7 +21,7 @@ const ViewGrid = ({ usersArray,
             <MainTable usersArray = {usersArray}  modal = {modalProp} 
             deleteUser = {deleteUser}  updateUser = {updateUser}  useStyles = {useStyles} />
 
-            <Modal  singleUser = {singleUser} modal = {modalProp}
+            <MyModal  singleUser = {singleUser} modal = {modalProp} setModal = {setModal}
              submit = {submit}  onChange = {onChange} useStyles = {useStyles} />
         </div>
     );
