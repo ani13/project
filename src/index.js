@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import store from '.store';
 import TableContainer from './container/TableContainer';
 import TreeGridContainer from './container/TreeGridContainer';
 
@@ -124,4 +126,9 @@ const App = () => {
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(
+  <Provider store = {store}>
+      <App />
+  </Provider>
+
+);
