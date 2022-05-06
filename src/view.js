@@ -2,13 +2,14 @@ import { Button } from "@mui/material";
 import MainTable from "./components/Table/MainTable";
 import MyModal from "./components/Modal";
 import React from 'react'
+import Alert from "./components/Alert";
 
 
 
 
 const ViewGrid = ({ usersArray,
          singleUser, modalProp,  setModal , submit,  onChange ,
-          deleteUser,  updateUser, useStyles }) => {
+          deleteUser,  updateUser, useStyles, open, setOpen, alertMessage }) => {
 
     const classes = useStyles();
     return(
@@ -23,6 +24,9 @@ const ViewGrid = ({ usersArray,
 
             <MyModal  singleUser = {singleUser} modal = {modalProp} setModal = {setModal}
              submit = {submit}  onChange = {onChange} useStyles = {useStyles} />
+
+            <Alert alertMessage = {alertMessage} open= {open} setOpen={setOpen} />
+
         </div>
     );
 

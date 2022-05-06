@@ -8,13 +8,26 @@ const TableContainer = ({useStyles}) => {
     const [user, setUser] = useState({ fullName: '', position: '', salary: null , date: '',
     type: '', id: 0 });
     const [modal, setModal] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [alertMessage, setMessage] = useState('');
     //================================================//
 
 
     // submit function //
     const submit = () => {
+    
         if(user.id === 0) {
 
+            if(user.fullName === '') {
+                setOpen(true);
+                setMessage('The Full Name must be nonempty')
+                return;
+            }
+            if(user.salary < 0) {
+                setOpen(true);
+                setMessage('The Salary can not be NEGATIVE')
+                return;
+            }
             let id = users.length === 0 ? 1 : users[users.length-1].id + 1;
             let u = {fullName: user.fullName , position: user.position, salary: user.salary , date: user.date,
             type: user.type, id: id}
@@ -75,7 +88,8 @@ const TableContainer = ({useStyles}) => {
 
     return (<ViewGrid usersArray = {users} 
          singleUser = {user} modalProp = {modal} setModal = {setModal} submit = {submit} onChange = {onChange}
-          deleteUser = {deleteUser} updateUser = {updateUser} useStyles = {useStyles} />);
+          deleteUser = {deleteUser} updateUser = {updateUser} useStyles = {useStyles}
+           open = {open} setOpen = {setOpen} alertMessage = {alertMessage}/>);
 
 }
 
