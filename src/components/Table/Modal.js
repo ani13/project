@@ -18,11 +18,7 @@ const MyModal = ({
   const classes = useStyles();
 
   return (
-    <Modal
-      open={modal}
-      onClose={() => setModal(false)}
-      className={classes.modal}
-    >
+    <Modal open={modal} onClose={() => setModal(false)} className="modal">
       <Stack className={classes.form} spacing={2}>
         <TextField
           className={classes.formItem}

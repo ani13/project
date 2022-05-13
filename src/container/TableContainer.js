@@ -30,17 +30,19 @@ const TableContainer = ({ add, remove, update, grid }) => {
     },
 
     form: {
+      boxSizing: "border-box",
       position: "absolute",
       top: "50%",
       left: "50%",
       transform: "translate(-50%, -50%)",
       boxShadow: 24,
       backgroundColor: "white",
-      padding: "10px",
+      padding: "20px",
+      margin: "5px",
       borderWidth: "5px",
       borderStyle: "solid",
       width: "fit-content",
-      height: "100%",
+      height: "90%",
       overflow: "scroll",
     },
 
