@@ -1,9 +1,54 @@
 import React, { useState } from "react";
+import { removeGrid } from "../actions/gridActions";
+import { addGrid } from "../actions/gridActions";
+import { updateGrid } from "../actions/gridActions";
 import ViewGrid from "../view";
-import { useSelector, useDispatch } from "react-redux";
-import { add, remove, update } from "../reducers/gridSlice";
+import { connect } from "react-redux";
+import { makeStyles } from "@mui/styles";
 
-const TableContainer = ({ useStyles }) => {
+const TableContainer = ({ add, remove, update, grid }) => {
+  const useStyles = makeStyles({
+    Submitbutton: {
+      background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+      border: 0,
+      borderRadius: 3,
+      boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+      color: "white",
+      height: 48,
+      padding: "20px",
+    },
+
+    button: {
+      background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+      border: 0,
+      borderRadius: 3,
+      boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
+      color: "white",
+      padding: "0 30px",
+      margin: 8,
+      height: "30px",
+    },
+
+    form: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      boxShadow: 24,
+      backgroundColor: "white",
+      padding: "10px",
+      borderWidth: "5px",
+      borderStyle: "solid",
+      width: "fit-content",
+      height: "100%",
+      overflow: "scroll",
+    },
+
+    formItem: {
+      padding: "5px",
+      width: "250px",
+    },
+  });
   //states
   const [user, setUser] = useState({
     fullName: "",
@@ -17,8 +62,7 @@ const TableContainer = ({ useStyles }) => {
   const [open, setOpen] = useState(false);
   const [alertMessage, setMessage] = useState("");
   //================================================//
-  const dispatch = useDispatch();
-  const users = useSelector((state) => state.grid.value);
+  const users = grid;
 
   // submit function //
   const submit = () => {
@@ -42,9 +86,10 @@ const TableContainer = ({ useStyles }) => {
         type: user.type,
         id: id,
       };
-      dispatch(add(u));
+
+      add(u);
     } else {
-      dispatch(update(user));
+      update(user);
     }
 
     setUser({
@@ -71,8 +116,7 @@ const TableContainer = ({ useStyles }) => {
 
   // delete //
   const deleteUser = (id) => {
-    dispatch(remove(id));
-    console.log(users);
+    remove(id);
     setUser({
       fullName: "",
       position: "",
@@ -117,4 +161,25 @@ const TableContainer = ({ useStyles }) => {
   );
 };
 
-export default TableContainer;
+const mapStateToProps = function (state) {
+  return {
+    grid: state.grid,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // dispatching plain actions
+    add: (user) => {
+      dispatch(addGrid(user));
+    },
+    remove: (user) => {
+      dispatch(removeGrid(user));
+    },
+    update: (user) => {
+      dispatch(updateGrid(user));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableContainer);

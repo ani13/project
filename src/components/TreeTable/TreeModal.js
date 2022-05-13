@@ -10,7 +10,7 @@ import { FormControl } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 
 const MyModal = ({
   singleUser,
@@ -20,9 +20,10 @@ const MyModal = ({
   onChange,
   useStyles,
   onSelect,
+  grid,
 }) => {
   const classes = useStyles();
-  const gridUsers = useSelector((state) => state.grid.value);
+  const gridUsers = grid;
 
   return (
     <Modal open={modal} onClose={() => setModal(false)} className="modal">
@@ -152,4 +153,10 @@ const MyModal = ({
   );
 };
 
-export default MyModal;
+const mapStateToProps = function (state) {
+  return {
+    grid: state.grid,
+  };
+};
+
+export default connect(mapStateToProps)(MyModal);

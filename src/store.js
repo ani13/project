@@ -1,10 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
-import gridReducer from "./reducers/gridSlice";
-import treeReducer from "./reducers/treeSlice";
+import gridReducers from "./reducers/gridReducers";
+import { createStore } from "redux";
+import treeReducers from "./reducers/treeReducers";
+import { combineReducers } from "redux";
 
-export default configureStore({
-  reducer: {
-    grid: gridReducer,
-    tree: treeReducer,
-  },
-});
+export default createStore(
+  combineReducers({
+    grid: gridReducers,
+    tree: treeReducers,
+  })
+);

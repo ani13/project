@@ -7,11 +7,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React from "react";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 
-const MainTable = ({ modal, deleteUser, updateUser, useStyles }) => {
+const MainTable = ({ modal, deleteUser, updateUser, useStyles, grid }) => {
   const classes = useStyles();
-  const gridUsers = useSelector((state) => state.grid.value);
+  const gridUsers = grid;
   return (
     <TableContainer component={Paper}>
       <Table className="table" style={{ filter: modal ? "blur(2px)" : "none" }}>
@@ -57,4 +57,10 @@ const MainTable = ({ modal, deleteUser, updateUser, useStyles }) => {
   );
 };
 
-export default MainTable;
+const mapStateToProps = function (state) {
+  return {
+    grid: state.grid,
+  };
+};
+
+export default connect(mapStateToProps)(MainTable);

@@ -6,7 +6,7 @@ import { Fragment } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import React from "react";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 
 const MainTableTree = ({
   modal,
@@ -14,10 +14,10 @@ const MainTableTree = ({
   updateUser,
   addChild,
   useStyles,
+  tree,
 }) => {
   const classes = useStyles();
-
-  const Users = useSelector((state) => state.tree.value);
+  const Users = tree;
 
   function Row(props) {
     const item = props.user;
@@ -99,4 +99,10 @@ const MainTableTree = ({
   );
 };
 
-export default MainTableTree;
+const mapStateToProps = function (state) {
+  return {
+    tree: state.tree,
+  };
+};
+
+export default connect(mapStateToProps)(MainTableTree);
