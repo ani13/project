@@ -7,6 +7,14 @@
   height: 30px;
 }
 
+#deleteButton {
+  position: absolute;
+  top: 20px;
+  right: 185px;
+  width: 210px;
+  height: 30px;
+}
+
 #submitButton {
   width: 200px;
   align-self: center;
@@ -16,6 +24,7 @@ div {
   padding-left: 5px;
   padding-right: 5px;
 }
+
 
 
 

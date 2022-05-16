@@ -18,6 +18,16 @@ const TableContainer = ({ add, remove, update, grid }) => {
       padding: "20px",
     },
 
+    Deletebutton: {
+      background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+      border: 0,
+      borderRadius: 3,
+      boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+      color: "white",
+      height: 48,
+      padding: "20px",
+    },
+
     button: {
       background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
       border: 0,
@@ -41,6 +51,7 @@ const TableContainer = ({ add, remove, update, grid }) => {
       margin: "5px",
       borderWidth: "5px",
       borderStyle: "solid",
+      borderColor: "midnightblue",
       width: "fit-content",
       height: "90%",
       overflow: "scroll",
@@ -50,16 +61,24 @@ const TableContainer = ({ add, remove, update, grid }) => {
       padding: "5px",
       width: "250px",
     },
+
+    table: {
+      alignSelf: "center",
+      overflow: "hidden",
+    },
   });
   //states
-  const [user, setUser] = useState({
+  const emptyUser = {
     fullName: "",
     position: "",
     salary: null,
     date: "",
     type: "",
     id: 0,
-  });
+  };
+
+  const [checked, setChecked] = useState([]);
+  const [user, setUser] = useState(emptyUser);
   const [modal, setModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [alertMessage, setMessage] = useState("");
@@ -94,15 +113,7 @@ const TableContainer = ({ add, remove, update, grid }) => {
       update(user);
     }
 
-    setUser({
-      fullName: "",
-      position: "",
-      salary: "",
-      date: "",
-      type: "",
-      id: 0,
-    });
-
+    setUser(emptyUser);
     setModal(false);
   };
   //==================================================================================================//
@@ -117,16 +128,10 @@ const TableContainer = ({ add, remove, update, grid }) => {
   //==================================================================================================//
 
   // delete //
-  const deleteUser = (id) => {
-    remove(id);
-    setUser({
-      fullName: "",
-      position: "",
-      salary: "",
-      date: "",
-      type: "",
-      id: 0,
-    });
+  const deleteUser = () => {
+    checked.map((user) => remove(user.id));
+    setChecked([]);
+    setUser(emptyUser);
   };
 
   // update function //
@@ -159,6 +164,8 @@ const TableContainer = ({ add, remove, update, grid }) => {
       open={open}
       setOpen={setOpen}
       alertMessage={alertMessage}
+      checked={checked}
+      setChecked={setChecked}
     />
   );
 };

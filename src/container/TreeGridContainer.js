@@ -19,6 +19,16 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
       padding: "20px",
     },
 
+    Deletebutton: {
+      background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+      border: 0,
+      borderRadius: 3,
+      boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+      color: "white",
+      height: 48,
+      padding: "20px",
+    },
+
     button: {
       background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
       border: 0,
@@ -42,6 +52,7 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
       margin: "5px",
       borderWidth: "5px",
       borderStyle: "solid",
+      borderColor: "midnightblue",
       width: "fit-content",
       height: "90%",
       overflow: "scroll",
@@ -73,7 +84,7 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
     },
   });
   //states
-  const [user, setUser] = useState({
+  const emptyUser = {
     fullName: "",
     position: "",
     salary: null,
@@ -81,10 +92,12 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
     type: "",
     id: 0,
     parentId: 0,
-  });
+  };
+  const [user, setUser] = useState(emptyUser);
   const [modal, setModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [alertMessage, setMessage] = useState("");
+  const [checked, setChecked] = useState([]);
   //================================================//
   const users = tree;
 
@@ -115,15 +128,7 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
       add(u);
     } else update(user);
 
-    setUser({
-      fullName: "",
-      position: "",
-      salary: "",
-      date: "",
-      type: "",
-      id: 0,
-      parentId: 0,
-    });
+    setUser(emptyUser);
     setModal(false);
   };
   //==================================================================================================//
@@ -155,17 +160,10 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
   //==================================================================================================//
 
   // delete //
-  const deleteUser = (id) => {
-    remove(id);
-    setUser({
-      fullName: "",
-      position: "",
-      salary: "",
-      date: "",
-      type: "",
-      id: 0,
-      parentId: 0,
-    });
+  const deleteUser = () => {
+    checked.map((user) => remove(user.id));
+    setChecked([]);
+    setUser(emptyUser);
   };
 
   // update function //
@@ -214,6 +212,8 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
       setOpen={setOpen}
       alertMessage={alertMessage}
       onSelect={onSelect}
+      checked={checked}
+      setChecked={setChecked}
     />
   );
 };

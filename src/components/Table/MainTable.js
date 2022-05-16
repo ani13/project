@@ -1,5 +1,6 @@
 import TableHeadComponent from "./TableHead";
 import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,12 +10,31 @@ import Paper from "@mui/material/Paper";
 import React from "react";
 import { connect } from "react-redux";
 
-const MainTable = ({ modal, deleteUser, updateUser, useStyles, grid }) => {
+const MainTable = ({
+  modal,
+  updateUser,
+  useStyles,
+  grid,
+  checked,
+  setChecked,
+}) => {
   const classes = useStyles();
   const gridUsers = grid;
+
+  const handleChange = (event, user) => {
+    if (event.target.checked === false) {
+      setChecked(checked.filter((item) => item.id !== user.id));
+    } else {
+      setChecked([...checked, user]);
+    }
+  };
+
   return (
     <TableContainer component={Paper}>
-      <Table className="table" style={{ filter: modal ? "blur(2px)" : "none" }}>
+      <Table
+        className={classes.table}
+        style={{ filter: modal ? "blur(2px)" : "none" }}
+      >
         <TableHeadComponent />
         <TableBody>
           {gridUsers.map((item, id) => (
@@ -26,16 +46,7 @@ const MainTable = ({ modal, deleteUser, updateUser, useStyles, grid }) => {
               <TableCell>{item.date}</TableCell>
               <TableCell>{item.type}</TableCell>
               <TableCell>
-                {" "}
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  type="button"
-                  onClick={() => deleteUser(item.id)}
-                >
-                  {" "}
-                  Delete{" "}
-                </Button>
+                <Checkbox onChange={(event) => handleChange(event, item)} />
               </TableCell>
               <TableCell>
                 {" "}

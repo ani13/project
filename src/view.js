@@ -16,10 +16,23 @@ const ViewGrid = ({
   open,
   setOpen,
   alertMessage,
+  checked,
+  setChecked,
 }) => {
   const classes = useStyles();
   return (
     <div className="container">
+      <Button
+        variant="contained"
+        className={classes.Deletebutton}
+        id="deleteButton"
+        onClick={deleteUser}
+        style={{ filter: modalProp ? "blur(2px)" : "none" }}
+      >
+        {" "}
+        Delete Checked Users{" "}
+      </Button>
+
       <Button
         variant="contained"
         className={classes.Submitbutton}
@@ -33,9 +46,10 @@ const ViewGrid = ({
 
       <MainTable
         modal={modalProp}
-        deleteUser={deleteUser}
         updateUser={updateUser}
         useStyles={useStyles}
+        checked={checked}
+        setChecked={setChecked}
       />
 
       <MyModal

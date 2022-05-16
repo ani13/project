@@ -18,11 +18,24 @@ const ViewTree = ({
   setOpen,
   alertMessage,
   onSelect,
+  checked,
+  setChecked,
 }) => {
   const classes = useStyles();
 
   return (
     <div className="container">
+      <Button
+        variant="contained"
+        className={classes.Deletebutton}
+        id="deleteButton"
+        onClick={deleteUser}
+        style={{ filter: modalProp ? "blur(2px)" : "none" }}
+      >
+        {" "}
+        Delete Checked Users{" "}
+      </Button>
+
       <Button
         variant="contained"
         className={classes.Submitbutton}
@@ -36,10 +49,11 @@ const ViewTree = ({
 
       <MainTableTree
         modal={modalProp}
-        deleteUser={deleteUser}
         updateUser={updateUser}
         addChild={addChild}
         useStyles={useStyles}
+        checked={checked}
+        setChecked={setChecked}
       />
 
       <MyModal
