@@ -8,14 +8,39 @@ import { updateTree } from "../actions/treeActions";
 const TreeGridContainer = ({ tree, add, remove, update }) => {
   //states
   const emptyUser = {
-    fullName: "",
-    position: "",
-    salary: null,
+    field1: "",
+    field2: "",
+    numericField: null,
     date: "",
     type: "",
     id: 0,
     parentId: 0,
   };
+
+  const TreeConfig = [
+    { fieldName: "id", title: "ID", type: "number", destination: "" },
+    {
+      fieldName: "field1",
+      title: "Full Name",
+      type: "text",
+      destination: "form",
+    },
+    {
+      fieldName: "field2",
+      title: "Position",
+      type: "text",
+      destination: "form",
+    },
+    {
+      fieldName: "numericField",
+      title: "Salary",
+      type: "number",
+      destination: "form",
+    },
+    { fieldName: "date", title: "Date", type: "date", destination: "form" },
+    { fieldName: "type", title: "Type", type: "text", destination: "" },
+  ];
+
   const [user, setUser] = useState(emptyUser);
   const [modal, setModal] = useState(false);
   const [open, setOpen] = useState(false);
@@ -27,21 +52,21 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
   // submit function //
   const submit = () => {
     if (user.id === 0) {
-      if (user.fullName === "") {
+      if (user.field1 === "") {
         setOpen(true);
         setMessage("The Full Name must not be EMPTY");
         return;
       }
-      if (user.salary < 0) {
+      if (user.numericField < 0) {
         setOpen(true);
-        setMessage("The Salary can not be NEGATIVE");
+        setMessage("The numericField can not be NEGATIVE");
         return;
       }
       let id = users.length === 0 ? 1 : users[users.length - 1].id + 1;
       let u = {
-        fullName: user.fullName,
-        position: user.position,
-        salary: user.salary,
+        field1: user.field1,
+        field2: user.field2,
+        numericField: user.numericField,
         date: user.date,
         type: user.type,
         id: id,
@@ -70,9 +95,9 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
     if (myUser === "") return;
 
     setUser({
-      fullName: myUser.fullName,
-      position: myUser.position,
-      salary: myUser.salary,
+      field1: myUser.field1,
+      field2: myUser.field2,
+      numericField: myUser.numericField,
       date: myUser.date,
       type: myUser.type,
       id: user.id,
@@ -96,9 +121,9 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
     let myUser = newArray.find((item) => item.id === id);
 
     setUser({
-      fullName: myUser.fullName,
-      position: myUser.position,
-      salary: myUser.salary,
+      field1: myUser.field1,
+      field2: myUser.field2,
+      numericField: myUser.numericField,
       date: myUser.date,
       type: myUser.type,
       id: myUser.id,
@@ -110,9 +135,9 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
   const addChild = (id) => {
     setModal(true);
     setUser({
-      fullName: user.fullName,
-      position: user.position,
-      salary: user.salary,
+      field1: user.field1,
+      field2: user.field2,
+      numericField: user.numericField,
       date: user.date,
       type: user.type,
       id: user.id,
@@ -137,6 +162,7 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
       onSelect={onSelect}
       checked={checked}
       setChecked={setChecked}
+      TreeConfig={TreeConfig}
     />
   );
 };

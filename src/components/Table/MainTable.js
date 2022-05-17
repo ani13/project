@@ -9,6 +9,23 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React from "react";
 import { makeStyles } from "@mui/styles";
+const useStyles = makeStyles({
+  button: {
+    background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
+    border: 0,
+    borderRadius: 3,
+    boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
+    color: "white",
+    padding: "0 30px",
+    margin: 8,
+    height: "30px",
+  },
+
+  table: {
+    alignSelf: "center",
+    overflow: "hidden",
+  },
+});
 
 const MainTable = ({
   users,
@@ -18,24 +35,6 @@ const MainTable = ({
   setChecked,
   GridConfig,
 }) => {
-  const useStyles = makeStyles({
-    button: {
-      background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-      border: 0,
-      borderRadius: 3,
-      boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
-      color: "white",
-      padding: "0 30px",
-      margin: 8,
-      height: "30px",
-    },
-
-    table: {
-      alignSelf: "center",
-      overflow: "hidden",
-    },
-  });
-
   const classes = useStyles();
   const gridUsers = users;
 
@@ -57,12 +56,10 @@ const MainTable = ({
         <TableBody>
           {gridUsers.map((item) => (
             <TableRow>
-              <TableCell> {item.id}</TableCell>
-              <TableCell>{item.field1}</TableCell>
-              <TableCell>{item.field2}</TableCell>
-              <TableCell>{item.numericField}</TableCell>
-              <TableCell>{item.date}</TableCell>
-              <TableCell>{item.type}</TableCell>
+              {GridConfig.map((field) => (
+                <TableCell> {item[field.fieldName]}</TableCell>
+              ))}
+
               <TableCell>
                 <Checkbox onChange={(event) => handleChange(event, item)} />
               </TableCell>

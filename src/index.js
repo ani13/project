@@ -8,7 +8,6 @@ import { makeStyles } from "@mui/styles";
 import { AppBar } from "@mui/material";
 import Container from "@mui/material/Container";
 import { Typography } from "@mui/material";
-
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 const useStyles = makeStyles({

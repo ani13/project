@@ -5,6 +5,19 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import React from "react";
 import Row from "./Row";
 import { makeStyles } from "@mui/styles";
+const useStyles = makeStyles({
+  Tree: {
+    border: 0,
+    borderRadius: 3,
+    boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+    display: "grid",
+    marginLeft: "auto",
+    marginRight: "auto",
+    gridTemplateColumns: "repeat(1, 1fr)",
+    rowGap: "5px",
+    overflow: "hidden",
+  },
+});
 
 const MainTableTree = ({
   users,
@@ -13,20 +26,8 @@ const MainTableTree = ({
   addChild,
   checked,
   setChecked,
+  TreeConfig,
 }) => {
-  const useStyles = makeStyles({
-    Tree: {
-      border: 0,
-      borderRadius: 3,
-      boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
-      display: "grid",
-      marginLeft: "auto",
-      marginRight: "auto",
-      gridTemplateColumns: "repeat(1, 1fr)",
-      rowGap: "5px",
-      overflow: "hidden",
-    },
-  });
   const classes = useStyles();
   const Users = users;
 
@@ -38,7 +39,7 @@ const MainTableTree = ({
       className={classes.Tree}
       style={{ filter: modal ? "blur(2px)" : "none" }}
     >
-      <TableHeadTree />
+      <TableHeadTree TreeConfig={TreeConfig} />
 
       {Users.filter((item) => item.parentId === 0).map((item) => (
         <Row
@@ -48,6 +49,7 @@ const MainTableTree = ({
           addChild={addChild}
           checked={checked}
           setChecked={setChecked}
+          TreeConfig={TreeConfig}
         />
       ))}
     </TreeView>

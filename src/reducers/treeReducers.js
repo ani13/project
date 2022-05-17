@@ -26,9 +26,9 @@ const treeReducers = (users = initialState, action) => {
       return users.map((item) =>
         item.id === action.payload.id
           ? {
-              fullName: action.payload.fullName,
-              position: action.payload.position,
-              salary: action.payload.salary,
+              field1: action.payload.field1,
+              field2: action.payload.field2,
+              numericField: action.payload.numericField,
               date: action.payload.date,
               type: action.payload.type,
               id: action.payload.id,
