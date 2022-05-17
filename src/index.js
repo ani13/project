@@ -1,70 +1,48 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { useState } from "react";
 import { Provider } from "react-redux";
 import store from "./store";
 import TableContainer from "./container/TableContainer";
 import TreeGridContainer from "./container/TreeGridContainer";
 import { makeStyles } from "@mui/styles";
 import { AppBar } from "@mui/material";
-import { Toolbar } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import MenuItem from "@mui/material/MenuItem";
+import { Typography } from "@mui/material";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 const useStyles = makeStyles({
   link: {
     textDecoration: "none",
+    color: "white",
+    margin: "20px",
+    lineHeight: 3,
   },
 
   offset: {
     boxSizing: "border-box",
     paddingTop: "200px",
   },
+  container: {
+    height: "60px",
+    justifyContent: "center",
+  },
 });
 
 const App = () => {
-  const [Open, setOpen] = useState(false);
-
-  const handleOpenNavMenu = () => {
-    setOpen(true);
-  };
-
-  const handleCloseNavMenu = () => {
-    setOpen(false);
-  };
   return (
     <Router>
       <div>
         <AppBar position="static">
-          <Container maxWidth="xl">
-            <Toolbar disableGutters id="toolbar">
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu id="menu-appbar" open={Open} onClose={handleCloseNavMenu}>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Link className={useStyles().link} to="/">
-                    Table
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Link className={useStyles().link} to="/tree">
-                    Tree grid
-                  </Link>
-                </MenuItem>
-              </Menu>
-            </Toolbar>
+          <Container maxWidth="xl" className={useStyles().container}>
+            <Typography variant="h6" color="inherit" component="div">
+              <Link className={useStyles().link} to="/">
+                Table
+              </Link>
+              <Link className={useStyles().link} to="/tree">
+                Tree grid
+              </Link>
+            </Typography>
           </Container>
         </AppBar>
 

@@ -4,78 +4,41 @@ import { addGrid } from "../actions/gridActions";
 import { updateGrid } from "../actions/gridActions";
 import ViewGrid from "../view";
 import { connect } from "react-redux";
-import { makeStyles } from "@mui/styles";
 
 const TableContainer = ({ add, remove, update, grid }) => {
-  const useStyles = makeStyles({
-    Submitbutton: {
-      background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-      border: 0,
-      borderRadius: 3,
-      boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-      color: "white",
-      height: 48,
-      padding: "20px",
-    },
-
-    Deletebutton: {
-      background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-      border: 0,
-      borderRadius: 3,
-      boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-      color: "white",
-      height: 48,
-      padding: "20px",
-    },
-
-    button: {
-      background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-      border: 0,
-      borderRadius: 3,
-      boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
-      color: "white",
-      padding: "0 30px",
-      margin: 8,
-      height: "30px",
-    },
-
-    form: {
-      boxSizing: "border-box",
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      boxShadow: 24,
-      backgroundColor: "white",
-      padding: "20px",
-      margin: "5px",
-      borderWidth: "5px",
-      borderStyle: "solid",
-      borderColor: "midnightblue",
-      width: "fit-content",
-      height: "90%",
-      overflow: "scroll",
-    },
-
-    formItem: {
-      padding: "5px",
-      width: "250px",
-    },
-
-    table: {
-      alignSelf: "center",
-      overflow: "hidden",
-    },
-  });
   //states
   const emptyUser = {
-    fullName: "",
-    position: "",
-    salary: null,
+    field1: "",
+    field2: "",
+    numericField: null,
     date: "",
     type: "",
     id: 0,
   };
+
+  const GridConfig = [
+    { fieldName: "ID", title: "ID", type: "number", destination: "" },
+    {
+      fieldName: "field1",
+      title: "Full Name",
+      type: "text",
+      destination: "form",
+    },
+    {
+      fieldName: "field2",
+      title: "Position",
+      type: "text",
+      destination: "form",
+    },
+    {
+      fieldName: "numericField",
+      title: "Salary",
+      type: "number",
+      destination: "form",
+    },
+    { fieldName: "date", title: "Date", type: "date", destination: "form" },
+    { fieldName: "type", title: "Type", type: "text", destination: "form" },
+  ];
 
   const [checked, setChecked] = useState([]);
   const [user, setUser] = useState(emptyUser);
@@ -88,21 +51,21 @@ const TableContainer = ({ add, remove, update, grid }) => {
   // submit function //
   const submit = () => {
     if (user.id === 0) {
-      if (user.fullName === "") {
+      if (user.field1 === "") {
         setOpen(true);
-        setMessage("The Full Name must be nonempty");
+        setMessage(`The identification field must be nonempty`);
         return;
       }
-      if (user.salary < 0) {
+      if (user.numericField < 0) {
         setOpen(true);
-        setMessage("The Salary can not be NEGATIVE");
+        setMessage("The number can not be NEGATIVE");
         return;
       }
       let id = users.length === 0 ? 1 : users[users.length - 1].id + 1;
       let u = {
-        fullName: user.fullName,
-        position: user.position,
-        salary: user.salary,
+        field1: user.field1,
+        field2: user.field2,
+        numericField: user.numericField,
         date: user.date,
         type: user.type,
         id: id,
@@ -141,9 +104,9 @@ const TableContainer = ({ add, remove, update, grid }) => {
     let myUser = newArray.find((item) => item.id === id);
 
     setUser({
-      fullName: myUser.fullName,
-      position: myUser.position,
-      salary: myUser.salary,
+      field1: myUser.field1,
+      field2: myUser.field2,
+      numericField: myUser.numericField,
       date: myUser.date,
       type: myUser.type,
       id: id,
@@ -152,7 +115,7 @@ const TableContainer = ({ add, remove, update, grid }) => {
 
   return (
     <ViewGrid
-      usersArray={users}
+      users={users}
       singleUser={user}
       modalProp={modal}
       setModal={setModal}
@@ -160,12 +123,12 @@ const TableContainer = ({ add, remove, update, grid }) => {
       onChange={onChange}
       deleteUser={deleteUser}
       updateUser={updateUser}
-      useStyles={useStyles}
       open={open}
       setOpen={setOpen}
       alertMessage={alertMessage}
       checked={checked}
       setChecked={setChecked}
+      GridConfig={GridConfig}
     />
   );
 };

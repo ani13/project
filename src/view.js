@@ -3,8 +3,10 @@ import MainTable from "./components/Table/MainTable";
 import MyModal from "./components/Table/Modal";
 import React from "react";
 import Alert from "./components/Alert";
+import { makeStyles } from "@mui/styles";
 
 const ViewGrid = ({
+  users,
   singleUser,
   modalProp,
   setModal,
@@ -12,13 +14,34 @@ const ViewGrid = ({
   onChange,
   deleteUser,
   updateUser,
-  useStyles,
   open,
   setOpen,
   alertMessage,
   checked,
   setChecked,
+  GridConfig,
 }) => {
+  const useStyles = makeStyles({
+    Submitbutton: {
+      background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+      border: 0,
+      borderRadius: 3,
+      boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+      color: "white",
+      height: 48,
+      padding: "20px",
+    },
+
+    Deletebutton: {
+      background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+      border: 0,
+      borderRadius: 3,
+      boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+      color: "white",
+      height: 48,
+      padding: "20px",
+    },
+  });
   const classes = useStyles();
   return (
     <div className="container">
@@ -45,11 +68,12 @@ const ViewGrid = ({
       </Button>
 
       <MainTable
+        users={users}
         modal={modalProp}
         updateUser={updateUser}
-        useStyles={useStyles}
         checked={checked}
         setChecked={setChecked}
+        GridConfig={GridConfig}
       />
 
       <MyModal
@@ -58,7 +82,7 @@ const ViewGrid = ({
         setModal={setModal}
         submit={submit}
         onChange={onChange}
-        useStyles={useStyles}
+        GridConfig={GridConfig}
       />
 
       <Alert alertMessage={alertMessage} open={open} setOpen={setOpen} />

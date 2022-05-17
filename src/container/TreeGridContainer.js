@@ -5,84 +5,7 @@ import { addTree } from "../actions/treeActions";
 import { removeTree } from "../actions/treeActions";
 import { updateTree } from "../actions/treeActions";
 
-import { makeStyles } from "@mui/styles";
-
 const TreeGridContainer = ({ tree, add, remove, update }) => {
-  const useStyles = makeStyles({
-    Submitbutton: {
-      background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-      border: 0,
-      borderRadius: 3,
-      boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-      color: "white",
-      height: 48,
-      padding: "20px",
-    },
-
-    Deletebutton: {
-      background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-      border: 0,
-      borderRadius: 3,
-      boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-      color: "white",
-      height: 48,
-      padding: "20px",
-    },
-
-    button: {
-      background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-      border: 0,
-      borderRadius: 3,
-      boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
-      color: "white",
-      padding: "0 30px",
-      margin: 8,
-      height: "30px",
-    },
-
-    form: {
-      boxSizing: "border-box",
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      boxShadow: 24,
-      backgroundColor: "white",
-      padding: "20px",
-      margin: "5px",
-      borderWidth: "5px",
-      borderStyle: "solid",
-      borderColor: "midnightblue",
-      width: "fit-content",
-      height: "90%",
-      overflow: "scroll",
-    },
-
-    formItem: {
-      padding: "5px",
-      width: "250px",
-    },
-
-    Tree: {
-      border: 0,
-      borderRadius: 3,
-      boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
-      display: "grid",
-      marginLeft: "auto",
-      marginRight: "auto",
-      gridTemplateColumns: "repeat(1, 1fr)",
-      rowGap: "5px",
-      overflow: "hidden",
-    },
-
-    Row: {
-      display: "grid",
-      gridTemplateColumns: "repeat(9, 1fr)",
-      columnGap: "5px",
-      rowGap: "5px",
-      margin: "15px",
-    },
-  });
   //states
   const emptyUser = {
     fullName: "",
@@ -199,6 +122,7 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
 
   return (
     <ViewTree
+      users={users}
       singleUser={user}
       modalProp={modal}
       setModal={setModal}
@@ -207,7 +131,6 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
       deleteUser={deleteUser}
       updateUser={updateUser}
       addChild={addChild}
-      useStyles={useStyles}
       open={open}
       setOpen={setOpen}
       alertMessage={alertMessage}

@@ -3,20 +3,32 @@ import { TreeView } from "@mui/lab";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import React from "react";
-import { connect } from "react-redux";
 import Row from "./Row";
+import { makeStyles } from "@mui/styles";
 
 const MainTableTree = ({
+  users,
   modal,
   updateUser,
   addChild,
-  useStyles,
-  tree,
   checked,
   setChecked,
 }) => {
+  const useStyles = makeStyles({
+    Tree: {
+      border: 0,
+      borderRadius: 3,
+      boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+      display: "grid",
+      marginLeft: "auto",
+      marginRight: "auto",
+      gridTemplateColumns: "repeat(1, 1fr)",
+      rowGap: "5px",
+      overflow: "hidden",
+    },
+  });
   const classes = useStyles();
-  const Users = tree;
+  const Users = users;
 
   return (
     <TreeView
@@ -26,7 +38,7 @@ const MainTableTree = ({
       className={classes.Tree}
       style={{ filter: modal ? "blur(2px)" : "none" }}
     >
-      <TableHeadTree useStyles={useStyles} />
+      <TableHeadTree />
 
       {Users.filter((item) => item.parentId === 0).map((item) => (
         <Row
@@ -34,7 +46,6 @@ const MainTableTree = ({
           Users={Users}
           updateUser={updateUser}
           addChild={addChild}
-          classes={classes}
           checked={checked}
           setChecked={setChecked}
         />
@@ -43,10 +54,4 @@ const MainTableTree = ({
   );
 };
 
-const mapStateToProps = function (state) {
-  return {
-    tree: state.tree,
-  };
-};
-
-export default connect(mapStateToProps)(MainTableTree);
+export default MainTableTree;

@@ -1,12 +1,27 @@
 const initialState = [];
 
+const recDeleteChild = (id, users) => {
+  //erase itself
+  users = users.filter((item) => item.id !== id);
+  if (users.length === 0) return users;
+
+  //erase children if present
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].parentId === id) {
+      users = recDeleteChild(users[i].id, users);
+    }
+  }
+
+  //return modified array
+  return users;
+};
 const treeReducers = (users = initialState, action) => {
   switch (action.type) {
     case "addTree":
       return [...users, action.payload];
     case "removeTree":
-      users = users.filter((item) => item.id !== action.payload);
-      return users.filter((item) => item.parentId !== action.payload);
+      const newUsers = recDeleteChild(action.payload, users);
+      return newUsers;
     case "updateTree":
       return users.map((item) =>
         item.id === action.payload.id

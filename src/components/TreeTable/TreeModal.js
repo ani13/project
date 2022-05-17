@@ -11,6 +11,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { connect } from "react-redux";
+import { makeStyles } from "@mui/styles";
 
 const MyModal = ({
   singleUser,
@@ -18,10 +19,43 @@ const MyModal = ({
   setModal,
   submit,
   onChange,
-  useStyles,
   onSelect,
   grid,
 }) => {
+  const useStyles = makeStyles({
+    Submitbutton: {
+      background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+      border: 0,
+      borderRadius: 3,
+      boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+      color: "white",
+      height: 48,
+      padding: "20px",
+    },
+
+    form: {
+      boxSizing: "border-box",
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      boxShadow: 24,
+      backgroundColor: "white",
+      padding: "20px",
+      margin: "5px",
+      borderWidth: "5px",
+      borderStyle: "solid",
+      borderColor: "midnightblue",
+      width: "fit-content",
+      height: "90%",
+      overflow: "scroll",
+    },
+
+    formItem: {
+      padding: "5px",
+      width: "250px",
+    },
+  });
   const classes = useStyles();
   const gridUsers = grid;
 

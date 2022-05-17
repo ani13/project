@@ -6,6 +6,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 import React from "react";
+import { makeStyles } from "@mui/styles";
 
 const MyModal = ({
   singleUser,
@@ -13,55 +14,63 @@ const MyModal = ({
   setModal,
   submit,
   onChange,
-  useStyles,
+  GridConfig,
 }) => {
+  const useStyles = makeStyles({
+    Submitbutton: {
+      background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+      border: 0,
+      borderRadius: 3,
+      boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+      color: "white",
+      height: 48,
+      padding: "20px",
+    },
+
+    form: {
+      boxSizing: "border-box",
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      boxShadow: 24,
+      backgroundColor: "white",
+      padding: "20px",
+      margin: "5px",
+      borderWidth: "5px",
+      borderStyle: "solid",
+      borderColor: "midnightblue",
+      width: "fit-content",
+      height: "90%",
+      overflow: "scroll",
+    },
+
+    formItem: {
+      padding: "5px",
+      width: "250px",
+    },
+  });
   const classes = useStyles();
 
   return (
     <Modal open={modal} onClose={() => setModal(false)} className="modal">
       <Stack className={classes.form} spacing={2}>
-        <TextField
-          className={classes.formItem}
-          label="Full Name"
-          type="text"
-          name="fullName"
-          value={singleUser.fullName}
-          onChange={(event) => onChange(event)}
-          autoComplete="current-password"
-        />
-
-        <TextField
-          className={classes.formItem}
-          label="Position"
-          type="text"
-          name="position"
-          value={singleUser.position}
-          onChange={(event) => onChange(event)}
-          autoComplete="current-password"
-        />
-
-        <TextField
-          className={classes.formItem}
-          label="Salary"
-          type="number"
-          name="salary"
-          value={singleUser.salary}
-          onChange={(event) => onChange(event)}
-          autoComplete="current-password"
-        />
-
-        <TextField
-          className={classes.formItem}
-          id="date"
-          name="date"
-          label="Date"
-          type="date"
-          value={singleUser.date}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={(event) => onChange(event)}
-        />
+        {GridConfig.filter((field) => field.destination === "form").map(
+          (field) => (
+            <TextField
+              className={classes.formItem}
+              label={field.title}
+              type={field.type}
+              name={field.fieldName}
+              value={singleUser.fieldName}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={(event) => onChange(event)}
+              autoComplete="current-password"
+            />
+          )
+        )}
 
         <FormLabel
           id="demo-controlled-radio-buttons-group"
@@ -76,28 +85,28 @@ const MyModal = ({
           onChange={(event) => onChange(event)}
         >
           <FormControlLabel
-            value="Intern"
+            value="junior"
             control={
               <Radio
                 name="radiobutton"
-                checked={singleUser.type === "Intern"}
-                value="Intern"
+                checked={singleUser.type === "junior"}
+                value="junior"
                 onChange={(event) => onChange(event)}
               />
             }
-            label="Intern"
+            label="junior"
           />
           <FormControlLabel
-            value="Junior"
+            value="middle"
             control={
               <Radio
                 name="radiobutton"
-                checked={singleUser.type === "Junior"}
-                value="Junior"
+                checked={singleUser.type === "middle"}
+                value="middle"
                 onChange={(event) => onChange(event)}
               />
             }
-            label="Junior"
+            label="middle"
           />
           <FormControlLabel
             value="Senior"
