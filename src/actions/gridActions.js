@@ -18,3 +18,10 @@ export const updateGrid = (myUser) => {
     payload: myUser,
   };
 };
+
+export const sortGrid = (params) => {
+  return {
+    type: "sortGrid",
+    payload: params,
+  };
+};

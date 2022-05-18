@@ -26,13 +26,13 @@ const useStyles = makeStyles({
     transform: "translate(-50%, -50%)",
     boxShadow: 24,
     backgroundColor: "white",
-    padding: "20px",
+    padding: "40px",
     margin: "5px",
     borderWidth: "5px",
     borderStyle: "solid",
     borderColor: "midnightblue",
     width: "fit-content",
-    height: "90%",
+    height: "fir-content",
     overflow: "scroll",
   },
 
@@ -62,7 +62,7 @@ const MyModal = ({
               label={field.title}
               type={field.type}
               name={field.fieldName}
-              value={singleUser.fieldName}
+              value={singleUser[field.fieldName]}
               InputLabelProps={{
                 shrink: true,
               }}

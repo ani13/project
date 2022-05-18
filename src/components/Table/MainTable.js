@@ -7,7 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   button: {
@@ -34,9 +34,11 @@ const MainTable = ({
   checked,
   setChecked,
   GridConfig,
+  sortUsers,
 }) => {
   const classes = useStyles();
-  const gridUsers = users;
+  let gridUsers = users;
+  const [configuration, setConfig] = useState(GridConfig);
 
   const handleChange = (event, user) => {
     if (event.target.checked === false) {
@@ -52,11 +54,16 @@ const MainTable = ({
         className={classes.table}
         style={{ filter: modal ? "blur(2px)" : "none" }}
       >
-        <TableHeadComponent GridConfig={GridConfig} />
+        <TableHeadComponent
+          updateUser={updateUser}
+          sortUsers={sortUsers}
+          configuration={configuration}
+          setConfig={setConfig}
+        />
         <TableBody>
           {gridUsers.map((item) => (
             <TableRow>
-              {GridConfig.map((field) => (
+              {configuration.map((field) => (
                 <TableCell> {item[field.fieldName]}</TableCell>
               ))}
 

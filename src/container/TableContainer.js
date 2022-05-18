@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { removeGrid } from "../actions/gridActions";
 import { addGrid } from "../actions/gridActions";
 import { updateGrid } from "../actions/gridActions";
+import { sortGrid } from "../actions/gridActions";
 import ViewGrid from "../view";
 import { connect } from "react-redux";
 
-const TableContainer = ({ add, remove, update, grid }) => {
+const TableContainer = ({ add, remove, update, sort, grid }) => {
   //states
   const emptyUser = {
     field1: "",
@@ -48,6 +49,12 @@ const TableContainer = ({ add, remove, update, grid }) => {
   //================================================//
   const users = grid;
 
+  const idCalculate = () => {
+    let ids = users.map((item) => item.id);
+    let highest = Math.max.apply(null, ids);
+    return highest + 1;
+  };
+
   // submit function //
   const submit = () => {
     if (user.id === 0) {
@@ -61,7 +68,7 @@ const TableContainer = ({ add, remove, update, grid }) => {
         setMessage("The number can not be NEGATIVE");
         return;
       }
-      let id = users.length === 0 ? 1 : users[users.length - 1].id + 1;
+      let id = users.length === 0 ? 1 : idCalculate();
       let u = {
         field1: user.field1,
         field2: user.field2,
@@ -103,14 +110,49 @@ const TableContainer = ({ add, remove, update, grid }) => {
     let newArray = users;
     let myUser = newArray.find((item) => item.id === id);
 
-    setUser({
-      field1: myUser.field1,
-      field2: myUser.field2,
-      numericField: myUser.numericField,
-      date: myUser.date,
-      type: myUser.type,
-      id: id,
-    });
+    setUser(myUser);
+  };
+
+  const sortUsers = (params) => {
+    let result = users;
+    if (params.direction === "descend") {
+      if (params.fieldname === "numericField" || params.fieldname === "id") {
+        result = users.sort((x, y) => {
+          return x[params.fieldname] - y[params.fieldname];
+        });
+      } else {
+        result = users.sort((a, b) => {
+          let x = a.type.toLowerCase();
+          let y = b.type.toLowerCase();
+          if (x < y) {
+            return -1;
+          }
+          if (x > y) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+    } else if (params.direction === "ascend") {
+      if (params.fieldname === "numericField" || params.fieldname === "id") {
+        result = users.sort((x, y) => {
+          return y[params.fieldname] - x[params.fieldname];
+        });
+      } else {
+        result = users.sort((a, b) => {
+          let x = a.type.toLowerCase();
+          let y = b.type.toLowerCase();
+          if (x < y) {
+            return -1;
+          }
+          if (x > y) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+    }
+    sort(result);
   };
 
   return (
@@ -129,11 +171,12 @@ const TableContainer = ({ add, remove, update, grid }) => {
       checked={checked}
       setChecked={setChecked}
       GridConfig={GridConfig}
+      sortUsers={sortUsers}
     />
   );
 };
 
-const mapStateToProps = function (state) {
+const mapStateToProps = (state) => {
   return {
     grid: state.grid,
   };
@@ -150,6 +193,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     update: (user) => {
       dispatch(updateGrid(user));
+    },
+    sort: (params) => {
+      dispatch(sortGrid(params));
     },
   };
 };

@@ -10,7 +10,7 @@ const gridReducers = (users = initialState, action) => {
       return users.map((item) =>
         item.id === action.payload.id
           ? {
-              field1: action.payload.fullName,
+              field1: action.payload.field1,
               field2: action.payload.field2,
               numericField: action.payload.numericField,
               date: action.payload.date,
@@ -19,6 +19,9 @@ const gridReducers = (users = initialState, action) => {
             }
           : item
       );
+    case "sortGrid":
+      return action.payload.map((user) => user);
+
     default:
       return users;
   }

@@ -41,6 +41,7 @@ const ViewGrid = ({
   checked,
   setChecked,
   GridConfig,
+  sortUsers,
 }) => {
   const classes = useStyles();
   return (
@@ -74,6 +75,7 @@ const ViewGrid = ({
         checked={checked}
         setChecked={setChecked}
         GridConfig={GridConfig}
+        sortUsers={sortUsers}
       />
 
       <MyModal

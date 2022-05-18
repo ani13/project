@@ -31,13 +31,13 @@ const useStyles = makeStyles({
     transform: "translate(-50%, -50%)",
     boxShadow: 24,
     backgroundColor: "white",
-    padding: "20px",
+    padding: "50px",
     margin: "5px",
     borderWidth: "5px",
     borderStyle: "solid",
     borderColor: "midnightblue",
     width: "fit-content",
-    height: "90%",
+    height: "fit-content",
     overflow: "scroll",
   },
 
@@ -93,7 +93,7 @@ const MyModal = ({
               <em>None</em>
             </MenuItem>
             {gridUsers.map((item) => (
-              <MenuItem value={item}> {item.fullName} </MenuItem>
+              <MenuItem value={item}> {item.field1} </MenuItem>
             ))}
           </Select>
         </FormControl>
