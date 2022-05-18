@@ -122,8 +122,8 @@ const TableContainer = ({ add, remove, update, sort, grid }) => {
         });
       } else {
         result = users.sort((a, b) => {
-          let x = a.type.toLowerCase();
-          let y = b.type.toLowerCase();
+          let x = a[params.fieldname];
+          let y = b[params.fieldname];
           if (x < y) {
             return -1;
           }
@@ -140,8 +140,8 @@ const TableContainer = ({ add, remove, update, sort, grid }) => {
         });
       } else {
         result = users.sort((a, b) => {
-          let x = a.type.toLowerCase();
-          let y = b.type.toLowerCase();
+          let x = a[params.fieldname];
+          let y = b[params.fieldname];
           if (x < y) {
             return -1;
           }

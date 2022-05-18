@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     transform: "translate(-50%, -50%)",
     boxShadow: 24,
     backgroundColor: "white",
-    padding: "40px",
+    padding: "10px",
     margin: "5px",
     borderWidth: "5px",
     borderStyle: "solid",
