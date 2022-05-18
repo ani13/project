@@ -143,10 +143,10 @@ const TableContainer = ({ add, remove, update, sort, grid }) => {
           let x = a[params.fieldname];
           let y = b[params.fieldname];
           if (x < y) {
-            return -1;
+            return 1;
           }
           if (x > y) {
-            return 1;
+            return -1;
           }
           return 0;
         });
