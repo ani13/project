@@ -10,7 +10,6 @@ import { FormControl } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { connect } from "react-redux";
 import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   Submitbutton: {
@@ -162,10 +161,4 @@ const MyModal = ({
   );
 };
 
-const mapStateToProps = function (state) {
-  return {
-    grid: state.grid,
-  };
-};
-
-export default connect(mapStateToProps)(MyModal);
+export default MyModal;

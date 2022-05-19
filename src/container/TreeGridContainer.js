@@ -5,7 +5,7 @@ import { addTree } from "../actions/treeActions";
 import { removeTree } from "../actions/treeActions";
 import { updateTree } from "../actions/treeActions";
 
-const TreeGridContainer = ({ tree, add, remove, update }) => {
+const TreeGridContainer = ({ tree, add, remove, update, grid }) => {
   //states
   const emptyUser = {
     field1: "",
@@ -163,6 +163,7 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
       checked={checked}
       setChecked={setChecked}
       TreeConfig={TreeConfig}
+      grid={grid}
     />
   );
 };
@@ -170,6 +171,7 @@ const TreeGridContainer = ({ tree, add, remove, update }) => {
 const mapStateToProps = function (state) {
   return {
     tree: state.tree,
+    grid: state.grid,
   };
 };
 

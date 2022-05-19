@@ -43,6 +43,7 @@ const ViewTree = ({
   checked,
   setChecked,
   TreeConfig,
+  grid,
 }) => {
   const classes = useStyles();
 
@@ -88,6 +89,7 @@ const ViewTree = ({
         onChange={onChange}
         onSelect={onSelect}
         TreeConfig={TreeConfig}
+        grid={grid}
       />
 
       <Alert alertMessage={alertMessage} open={open} setOpen={setOpen} />
