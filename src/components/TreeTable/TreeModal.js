@@ -70,7 +70,7 @@ const MyModal = ({
               label={field.title}
               type={field.type}
               name={field.fieldName}
-              value={singleUser.fieldName}
+              value={singleUser[field.fieldName]}
               InputLabelProps={{
                 shrink: true,
               }}
