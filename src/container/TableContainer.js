@@ -18,27 +18,48 @@ const TableContainer = ({ add, remove, update, sort, grid }) => {
   };
 
   const GridConfig = [
-    { fieldName: "id", title: "ID", type: "number", destination: "" },
+    {
+      fieldName: "id",
+      title: "ID",
+      type: "number",
+      destination: "",
+      showing: true,
+    },
     {
       fieldName: "field1",
       title: "Full Name",
       type: "text",
       destination: "form",
+      showing: true,
     },
     {
       fieldName: "field2",
       title: "Position",
       type: "text",
       destination: "form",
+      showing: true,
     },
     {
       fieldName: "numericField",
       title: "Salary",
       type: "number",
       destination: "form",
+      showing: true,
     },
-    { fieldName: "date", title: "Date", type: "date", destination: "form" },
-    { fieldName: "type", title: "Type", type: "text", destination: "" },
+    {
+      fieldName: "date",
+      title: "Date",
+      type: "date",
+      destination: "form",
+      showing: true,
+    },
+    {
+      fieldName: "type",
+      title: "Type",
+      type: "text",
+      destination: "",
+      showing: true,
+    },
   ];
 
   const [checked, setChecked] = useState([]);

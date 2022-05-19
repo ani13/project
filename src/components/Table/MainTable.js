@@ -63,9 +63,13 @@ const MainTable = ({
         <TableBody>
           {gridUsers.map((item) => (
             <TableRow>
-              {configuration.map((field) => (
-                <TableCell> {item[field.fieldName]}</TableCell>
-              ))}
+              {configuration.map((field) =>
+                field.showing === true ? (
+                  <TableCell> {item[field.fieldName]}</TableCell>
+                ) : (
+                  <TableCell></TableCell>
+                )
+              )}
 
               <TableCell>
                 <Checkbox onChange={(event) => handleChange(event, item)} />
