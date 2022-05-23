@@ -6,9 +6,10 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
+import { Fragment } from "react";
 import { makeStyles } from "@mui/styles";
+
 const useStyles = makeStyles({
   button: {
     background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
@@ -22,8 +23,17 @@ const useStyles = makeStyles({
   },
 
   table: {
+    boxSizing: "border-box",
     alignSelf: "center",
-    overflow: "hidden",
+    opacity: 0.99,
+    minHeight: "300px",
+    overflow: "visible",
+  },
+
+  tableCell: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
@@ -49,7 +59,7 @@ const MainTable = ({
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table
         className={classes.table}
         style={{ filter: modal ? "blur(2px)" : "none" }}
@@ -65,26 +75,33 @@ const MainTable = ({
             <TableRow>
               {configuration.map((field) =>
                 field.showing === true ? (
-                  <TableCell> {item[field.fieldName]}</TableCell>
+                  <TableCell>
+                    <div className={classes.tableCell}>
+                      {" "}
+                      {item[field.fieldName]}{" "}
+                    </div>
+                  </TableCell>
                 ) : (
-                  <TableCell></TableCell>
+                  <Fragment></Fragment>
                 )
               )}
 
               <TableCell>
-                <Checkbox onChange={(event) => handleChange(event, item)} />
+                <div className={classes.tableCell}>
+                  <Checkbox onChange={(event) => handleChange(event, item)} />{" "}
+                </div>
               </TableCell>
               <TableCell>
-                {" "}
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  type="button"
-                  onClick={() => updateUser(item.id)}
-                >
-                  {" "}
-                  Update{" "}
-                </Button>
+                <div className={classes.tableCell}>
+                  <Button
+                    variant="contained"
+                    className={classes.button}
+                    type="button"
+                    onClick={() => updateUser(item.id)}
+                  >
+                    Update
+                  </Button>
+                </div>
               </TableCell>
             </TableRow>
           ))}

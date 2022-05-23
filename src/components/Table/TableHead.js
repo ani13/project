@@ -6,10 +6,12 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
-import ConfigBar from "./hideshowbar";
+import ConfigBar from "./ConfigBar";
 import { Fragment } from "react";
+import { Typography } from "@mui/material";
 const useStyles = makeStyles({
   button: {
+    boxSizing: "border-box",
     "&:hover": {
       backgroundColor: "	rgb(135,206,250)",
       borderRadius: 12,
@@ -17,6 +19,13 @@ const useStyles = makeStyles({
       borderWidth: "1px",
       borderColor: "blue",
     },
+  },
+  header: { position: "relative" },
+  headerContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
@@ -29,16 +38,10 @@ const TableHeadComponent = ({ sortUsers, configuration, setConfig }) => {
     date: true,
     type: true,
   });
-  const [show, setShow] = useState({
-    id: false,
-    field1: false,
-    field2: false,
-    numericField: false,
-    date: false,
-    type: false,
-  });
-
+  const [show, setShow] = useState({ show: false, name: "" });
+  const [showColumns, setshowColumns] = useState(false);
   const classes = useStyles();
+
   const downComponent = (field) => (
     <ArrowDownwardIcon
       className={classes.button}
@@ -68,37 +71,56 @@ const TableHeadComponent = ({ sortUsers, configuration, setConfig }) => {
   return (
     <TableHead>
       <TableRow>
-        {configuration.map((field) => (
-          <Fragment>
-            <TableCell>
-              {field.showing ? field.title : ""}
-              {field.showing
-                ? sortConfig[field.fieldName]
-                  ? upComponent(field)
-                  : downComponent(field)
-                : ""}
+        {configuration.map((field) =>
+          field.showing === true ? (
+            <Fragment>
+              <TableCell className={classes.header}>
+                <div className={classes.headerContainer}>
+                  {field.showing ? (
+                    <Typography> {field.title} </Typography>
+                  ) : (
+                    ""
+                  )}
+                  {field.showing
+                    ? sortConfig[field.fieldName]
+                      ? upComponent(field)
+                      : downComponent(field)
+                    : ""}
 
-              <MoreVertIcon
-                fontSize="small"
-                onClick={() => {
-                  setShow({
-                    ...show,
-                    [field.fieldName]: !show[field.fieldName],
-                  });
-                }}
-              />
-              <ConfigBar
-                show={show}
-                setShow={setShow}
-                fieldName={field.fieldName}
-                configuration={configuration}
-                setConfig={setConfig}
-              />
-            </TableCell>
-          </Fragment>
-        ))}
-        <TableCell> Delete </TableCell>
-        <TableCell> Update </TableCell>
+                  <MoreVertIcon
+                    fontSize="small"
+                    onClick={() => {
+                      if (showColumns === true) setshowColumns(false);
+                      if (show.show === false)
+                        setShow({ show: !show.show, name: field.fieldName });
+                      else setShow({ show: !show.show, name: "" });
+                    }}
+                  />
+                  <ConfigBar
+                    show={show}
+                    setShow={setShow}
+                    fieldName={field.fieldName}
+                    configuration={configuration}
+                    setConfig={setConfig}
+                    sortUsers={sortUsers}
+                    showColumns={showColumns}
+                    setshowColumns={setshowColumns}
+                  />
+                </div>
+              </TableCell>
+            </Fragment>
+          ) : (
+            <Fragment></Fragment>
+          )
+        )}
+        <TableCell>
+          {" "}
+          <div className={classes.headerContainer}> Delete </div>
+        </TableCell>
+        <TableCell>
+          {" "}
+          <div className={classes.headerContainer}>Update</div>
+        </TableCell>
       </TableRow>
     </TableHead>
   );
