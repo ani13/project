@@ -7,6 +7,7 @@ const ColumnsChecker = ({ configuration, setConfiguration }) => {
     <FormGroup>
       {configuration.map((field) => (
         <FormControlLabel
+          key={field.fieldName}
           control={
             field.fieldName === "id" ? (
               <Switch disabled defaultChecked />
