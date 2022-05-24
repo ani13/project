@@ -63,34 +63,30 @@ const Row = ({
         <Fragment>
           <div className={classes.Row}>
             {TreeConfig.map((field) => (
-              <div> {item[field.fieldName]}</div>
+              <div key={field.fieldName}> {item[field.fieldName]}</div>
             ))}
             <div>
               <Checkbox onChange={(event) => handleChange(event, item)} />
             </div>
             <div>
-              {" "}
               <Button
                 variant="contained"
                 className={classes.button}
                 type="button"
                 onClick={() => updateUser(item.id)}
               >
-                {" "}
-                Update{" "}
-              </Button>{" "}
+                Update
+              </Button>
             </div>
             <div>
-              {" "}
               <Button
                 variant="contained"
                 className={classes.button}
                 type="button"
                 onClick={() => addChild(item.id)}
               >
-                {" "}
-                Child{" "}
-              </Button>{" "}
+                Child
+              </Button>
             </div>
           </div>
         </Fragment>
@@ -105,6 +101,7 @@ const Row = ({
           checked={checked}
           setChecked={setChecked}
           TreeConfig={TreeConfig}
+          key={item.id}
         />
       ))}
     </TreeItem>

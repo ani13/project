@@ -75,6 +75,7 @@ const MyModal = ({
               }}
               onChange={(event) => onChange(event)}
               autoComplete="current-password"
+              key={field.fieldName}
             />
           )
         )}
@@ -92,7 +93,9 @@ const MyModal = ({
               <em>None</em>
             </MenuItem>
             {gridUsers.map((item) => (
-              <MenuItem value={item}> {item.field1} </MenuItem>
+              <MenuItem value={item} key={item.id}>
+                {item.field1}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>

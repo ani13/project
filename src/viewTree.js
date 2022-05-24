@@ -56,8 +56,7 @@ const ViewTree = ({
         onClick={deleteUser}
         style={{ filter: modalProp ? "blur(2px)" : "none" }}
       >
-        {" "}
-        Delete Checked Users{" "}
+        Delete Checked Users
       </Button>
 
       <Button
@@ -67,8 +66,7 @@ const ViewTree = ({
         onClick={() => setModal(true)}
         style={{ filter: modalProp ? "blur(2px)" : "none" }}
       >
-        {" "}
-        Add new User{" "}
+        Add new User
       </Button>
 
       <MainTableTree

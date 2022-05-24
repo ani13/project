@@ -50,6 +50,7 @@ const MainTableTree = ({
           checked={checked}
           setChecked={setChecked}
           TreeConfig={TreeConfig}
+          key={item.id}
         />
       ))}
     </TreeView>

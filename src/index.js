@@ -56,9 +56,7 @@ const App = () => {
                 className={useStyles().offset}
               />
             }
-          >
-            {" "}
-          </Route>
+          ></Route>
           <Route
             path="/"
             element={
@@ -67,9 +65,7 @@ const App = () => {
                 className={useStyles().offset}
               />
             }
-          >
-            {" "}
-          </Route>
+          ></Route>
         </Routes>
       </div>
     </Router>

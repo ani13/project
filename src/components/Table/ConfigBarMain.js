@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { Fragment } from "react";
+import { Box } from "@mui/system";
 
 const ConfigBarMain = ({
   setShow,
@@ -10,14 +10,14 @@ const ConfigBarMain = ({
   sortUsers,
 }) => {
   return (
-    <Fragment>
+    <Box id="ConfigBarMain" sx={{ display: "flex", flexDirection: "column" }}>
       <Button
         onClick={() => {
           sortUsers({ direction: "descend", fieldname: "id" });
           setShow({ show: false, name: "" });
         }}
       >
-        Unsort{" "}
+        Unsort
       </Button>
       {fieldName === "id" ? (
         <Button disabled> Hide </Button>
@@ -36,10 +36,9 @@ const ConfigBarMain = ({
           setshowColumns(true);
         }}
       >
-        {" "}
         Show Columns
       </Button>
-    </Fragment>
+    </Box>
   );
 };
 

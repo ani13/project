@@ -68,6 +68,7 @@ const MyModal = ({
               }}
               onChange={(event) => onChange(event)}
               autoComplete="current-password"
+              key={field.fieldName}
             />
           )
         )}
@@ -128,8 +129,7 @@ const MyModal = ({
           id="submitButton"
           onClick={() => submit()}
         >
-          {" "}
-          Submit{" "}
+          Submit
         </Button>
       </Stack>
     </Modal>

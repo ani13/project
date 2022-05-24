@@ -1,27 +1,12 @@
-import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import Popover from "@mui/material/Popover";
 import React from "react";
 import ColumnsChecker from "./ColumnsChecker";
 import ConfigBarMain from "./ConfigBarMain";
 const useStyles = makeStyles({
   box: {
-    top: "50px",
-    right: "24%",
     boxSizing: "border-box",
-    position: "absolute",
-    border: "1px solid grey",
-    borderRadius: "2px",
-    boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
-    background: "white",
     display: "none",
-    flexDirection: "column",
-    padding: "2px",
-    zIndex: "1000",
-    opacity: 1,
-    width: "115px",
-    marginLeft: "auto",
-    marginRight: 0,
-    maxHeight: "350px",
     overflow: "scroll",
   },
 });
@@ -35,6 +20,8 @@ const ConfigBar = ({
   sortUsers,
   showColumns,
   setshowColumns,
+  handlePopover,
+  anchorEl,
 }) => {
   const classes = useStyles();
 
@@ -49,10 +36,20 @@ const ConfigBar = ({
   };
 
   return (
-    <Box
-      component="span"
+    <Popover
+      open={show.name === fieldName}
+      onClose={() => handlePopover(fieldName)}
+      id="simple-popover"
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "left",
+      }}
       className={classes.box}
-      id="configBox"
       sx={{ display: show.name === fieldName ? "flex" : "none" }}
     >
       {showColumns ? (
@@ -69,7 +66,7 @@ const ConfigBar = ({
           setConfiguration={setConfiguration}
         />
       )}
-    </Box>
+    </Popover>
   );
 };
 

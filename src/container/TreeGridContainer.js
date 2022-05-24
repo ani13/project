@@ -10,7 +10,7 @@ const TreeGridContainer = ({ tree, add, remove, update, grid }) => {
   const emptyUser = {
     field1: "",
     field2: "",
-    numericField: null,
+    numericField: 0,
     date: "",
     type: "",
     id: 0,

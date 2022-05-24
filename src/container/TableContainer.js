@@ -11,7 +11,7 @@ const TableContainer = ({ add, remove, update, sort, grid }) => {
   const emptyUser = {
     field1: "",
     field2: "",
-    numericField: null,
+    numericField: 0,
     date: "",
     type: "",
     id: 0,

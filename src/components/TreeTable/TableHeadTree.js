@@ -22,7 +22,7 @@ const TableHeadTree = ({ TreeConfig }) => {
         <Fragment>
           <div className={classes.Row}>
             {TreeConfig.map((field) => (
-              <div> {field.title} </div>
+              <div key={field.fieldName}> {field.title} </div>
             ))}
             <div>Delete</div>
             <div>Update</div>

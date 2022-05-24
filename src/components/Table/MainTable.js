@@ -26,7 +26,6 @@ const useStyles = makeStyles({
     boxSizing: "border-box",
     alignSelf: "center",
     opacity: 0.99,
-    minHeight: "300px",
     overflow: "visible",
   },
 
@@ -72,25 +71,24 @@ const MainTable = ({
         />
         <TableBody>
           {gridUsers.map((item) => (
-            <TableRow sx={{ maxHeight: "100px" }}>
+            <TableRow sx={{ maxHeight: "100px" }} key={item.id}>
               {configuration.map((field) =>
                 field.showing === true ? (
-                  <TableCell>
+                  <TableCell key={field.fieldName}>
                     <div className={classes.tableCell}>
-                      {" "}
-                      {item[field.fieldName]}{" "}
+                      {item[field.fieldName]}
                     </div>
                   </TableCell>
                 ) : (
-                  <Fragment></Fragment>
+                  <Fragment key={field.fieldName}></Fragment>
                 )
               )}
 
               <TableCell>
                 <div className={classes.tableCell}>
-                  <Checkbox onChange={(event) => handleChange(event, item)}>
-                    {" "}
-                  </Checkbox>
+                  <Checkbox
+                    onChange={(event) => handleChange(event, item)}
+                  ></Checkbox>
                 </div>
               </TableCell>
               <TableCell>
