@@ -1,11 +1,8 @@
 import { Box } from "@mui/material";
-import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import Switch from "@mui/material/Switch";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import { Fragment } from "react";
+import ColumnsChecker from "./ColumnsChecker";
+import ConfigBarMain from "./ConfigBarMain";
 const useStyles = makeStyles({
   box: {
     top: "50px",
@@ -40,6 +37,17 @@ const ConfigBar = ({
   setshowColumns,
 }) => {
   const classes = useStyles();
+
+  const setConfiguration = (fieldName) => {
+    setConfig(
+      configuration.map((fields) =>
+        fields.fieldName === fieldName
+          ? { ...fields, showing: !fields.showing }
+          : fields
+      )
+    );
+  };
+
   return (
     <Box
       component="span"
@@ -48,77 +56,18 @@ const ConfigBar = ({
       sx={{ display: show.name === fieldName ? "flex" : "none" }}
     >
       {showColumns ? (
-        <FormGroup>
-          {configuration.map((field) => (
-            <FormControlLabel
-              control={
-                field.fieldName === "id" ? (
-                  <Switch disabled defaultChecked />
-                ) : (
-                  <Switch
-                    checked={field.showing === true}
-                    onChange={() => {
-                      setConfig(
-                        configuration.map((fields) =>
-                          fields.fieldName === field.fieldName
-                            ? {
-                                title: fields.title,
-                                fieldName: field.fieldName,
-                                showing: !fields.showing,
-                              }
-                            : fields
-                        )
-                      );
-                    }}
-                  />
-                )
-              }
-              label={field.title}
-            />
-          ))}
-        </FormGroup>
+        <ColumnsChecker
+          configuration={configuration}
+          setConfiguration={setConfiguration}
+        />
       ) : (
-        <Fragment>
-          <Button
-            onClick={() => {
-              sortUsers({ direction: "descend", fieldname: "id" });
-              setShow({ show: false, name: "" });
-            }}
-          >
-            {" "}
-            Unsort{" "}
-          </Button>
-          {fieldName === "id" ? (
-            <Button disabled> Hide </Button>
-          ) : (
-            <Button
-              onClick={() => {
-                setConfig(
-                  configuration.map((fields) =>
-                    fields.fieldName === fieldName
-                      ? {
-                          title: fields.title,
-                          fieldName: fieldName,
-                          showing: false,
-                        }
-                      : fields
-                  )
-                );
-                setShow({ show: false, name: "" });
-              }}
-            >
-              Hide
-            </Button>
-          )}
-          <Button
-            onClick={() => {
-              setshowColumns(true);
-            }}
-          >
-            {" "}
-            Show Columns
-          </Button>
-        </Fragment>
+        <ConfigBarMain
+          setShow={setShow}
+          fieldName={fieldName}
+          setshowColumns={setshowColumns}
+          sortUsers={sortUsers}
+          setConfiguration={setConfiguration}
+        />
       )}
     </Box>
   );

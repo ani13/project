@@ -72,7 +72,7 @@ const MainTable = ({
         />
         <TableBody>
           {gridUsers.map((item) => (
-            <TableRow>
+            <TableRow sx={{ maxHeight: "100px" }}>
               {configuration.map((field) =>
                 field.showing === true ? (
                   <TableCell>
@@ -88,7 +88,9 @@ const MainTable = ({
 
               <TableCell>
                 <div className={classes.tableCell}>
-                  <Checkbox onChange={(event) => handleChange(event, item)} />{" "}
+                  <Checkbox onChange={(event) => handleChange(event, item)}>
+                    {" "}
+                  </Checkbox>
                 </div>
               </TableCell>
               <TableCell>

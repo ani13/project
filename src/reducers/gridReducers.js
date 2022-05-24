@@ -5,7 +5,8 @@ const gridReducers = (users = initialState, action) => {
     case "addGrid":
       return [...users, action.payload];
     case "removeGrid":
-      return users.filter((item) => item.id !== action.payload);
+      let newUsers = users.filter((item) => item.id !== action.payload);
+      return newUsers;
     case "updateGrid":
       return users.map((item) =>
         item.id === action.payload.id
